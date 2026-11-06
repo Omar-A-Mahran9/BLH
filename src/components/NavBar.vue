@@ -1,16 +1,35 @@
 <script setup>
-import { ref } from 'vue'
+import { onBeforeUnmount, onMounted, ref } from 'vue'
 import { useI18n } from '@/i18n'
 import BaseButton from './BaseButton.vue'
 import logo from '@/assets/images/logo-full-colour.png'
 
 const { t, toggleLocale } = useI18n()
 const open = ref(false)
+
+// Hide while scrolling down past the hero, reveal on any scroll up.
+const hidden = ref(false)
+let lastY = 0
+let ticking = false
+function onScroll() {
+  if (ticking) return
+  ticking = true
+  requestAnimationFrame(() => {
+    const y = window.scrollY
+    if (Math.abs(y - lastY) > 6) {
+      hidden.value = y > lastY && y > 160 && !open.value
+      lastY = y
+    }
+    ticking = false
+  })
+}
+onMounted(() => window.addEventListener('scroll', onScroll, { passive: true }))
+onBeforeUnmount(() => window.removeEventListener('scroll', onScroll))
 const anchors = ['#about', '#practices', '#services', '#partner', '#events']
 </script>
 
 <template>
-  <header class="nav">
+  <header class="nav" :class="{ 'nav--hidden': hidden }">
     <div class="container nav__inner">
       <a href="#top" class="nav__logo">
         <img :src="logo" :alt="t.alt.logo" width="156" height="60" />
@@ -55,6 +74,17 @@ const anchors = ['#about', '#practices', '#services', '#partner', '#events']
   z-index: 50;
   background: var(--blh-white);
   box-shadow: var(--blh-shadow-card);
+  transition: transform 0.45s var(--ease-out);
+  /* "backwards" only — a held end state would block the hide/show transition */
+  animation: nav-in 0.8s var(--ease-out) backwards;
+}
+.nav--hidden {
+  transform: translateY(-100%);
+}
+@keyframes nav-in {
+  from {
+    transform: translateY(-100%);
+  }
 }
 .nav__inner {
   display: flex;
@@ -113,6 +143,45 @@ const anchors = ['#about', '#practices', '#services', '#partner', '#events']
   height: 2px;
   border-radius: 1px;
   background: var(--blh-green);
+  transition:
+    transform 0.35s var(--ease-out),
+    opacity 0.2s ease;
+}
+/* Burger morphs into a close "×" */
+.nav__burger[aria-expanded='true'] span:nth-child(1) {
+  transform: translateY(7px) rotate(45deg);
+}
+.nav__burger[aria-expanded='true'] span:nth-child(2) {
+  opacity: 0;
+}
+.nav__burger[aria-expanded='true'] span:nth-child(3) {
+  transform: translateY(-7px) rotate(-45deg);
+}
+
+/* Desktop links: copper underline grows from the reading-start edge */
+.nav__links :deep(.btn) {
+  position: relative;
+}
+.nav__links :deep(.btn)::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  inset-inline: 16px;
+  height: 2px;
+  border-radius: 1px;
+  background: var(--blh-copper);
+  transform: scaleX(0);
+  transform-origin: left center;
+  transition: transform 0.35s var(--ease-out);
+}
+[dir='rtl'] .nav__links :deep(.btn)::after {
+  transform-origin: right center;
+}
+.nav__links :deep(.btn:hover)::after {
+  transform: scaleX(1);
+}
+.nav__links :deep(.btn:hover) {
+  background: transparent;
 }
 
 @media (max-width: 1180px) {

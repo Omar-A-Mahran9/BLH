@@ -1,5 +1,6 @@
 <script setup>
 import { useI18n } from '@/i18n'
+import CountUp from './CountUp.vue'
 import leadersAi from '@/assets/images/leaders-ai-session.png'
 import kpiWorkshop from '@/assets/images/kpi-workshop.png'
 
@@ -11,21 +12,35 @@ const { t } = useI18n()
     <div class="container inside__inner">
       <div class="inside__header">
         <div class="inside__heading">
-          <p class="t-eyebrow c-green">{{ t.inside.eyebrow }}</p>
-          <h2 class="t-h-section c-green">{{ t.inside.title }}</h2>
+          <p v-reveal class="t-eyebrow c-green">{{ t.inside.eyebrow }}</p>
+          <h2 v-reveal="80" class="t-h-section c-green">{{ t.inside.title }}</h2>
         </div>
-        <p class="inside__lead t-lead c-charcoal">{{ t.inside.lead }}</p>
+        <p v-reveal="180" class="inside__lead t-lead c-charcoal">{{ t.inside.lead }}</p>
       </div>
 
       <div class="inside__mosaic">
-        <img class="inside__photo inside__photo--wide" :src="leadersAi" :alt="t.alt.leadersAi" width="700" height="460" />
-        <img class="inside__photo inside__photo--narrow" :src="kpiWorkshop" :alt="t.alt.kpiWorkshop" width="480" height="460" />
+        <img
+          v-reveal.image
+          class="inside__photo inside__photo--wide"
+          :src="leadersAi"
+          :alt="t.alt.leadersAi"
+          width="700"
+          height="460"
+        />
+        <img
+          v-reveal.image="180"
+          class="inside__photo inside__photo--narrow"
+          :src="kpiWorkshop"
+          :alt="t.alt.kpiWorkshop"
+          width="480"
+          height="460"
+        />
       </div>
 
       <ul class="inside__stats">
-        <li v-for="stat in t.inside.stats" :key="stat.text" class="stat">
+        <li v-for="(stat, i) in t.inside.stats" :key="stat.text" v-reveal="i * 120" class="stat">
           <p class="stat__n">
-            <span class="t-display c-green">{{ stat.value }}</span>
+            <CountUp class="t-display c-green" :value="stat.value" :delay="i * 120" />
             <span class="stat__unit t-h3 c-copper">{{ stat.unit }}</span>
           </p>
           <p class="stat__text t-body c-charcoal">{{ stat.text }}</p>

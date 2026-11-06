@@ -17,14 +17,14 @@ const photos = { wally, ibrahim, atef, moataz, maha, omar, ibrahimAhmed, lojaine
   <section id="partner" class="team bg-white">
     <div class="container team__inner">
       <div class="team__header">
-        <p class="t-eyebrow t-eyebrow--medium c-green">{{ t.team.eyebrow }}</p>
-        <h2 class="team__title t-h-section c-green">{{ t.team.title }}</h2>
-        <span class="headline-rule" />
-        <p class="team__lead t-lead c-charcoal">{{ t.team.lead }}</p>
+        <p v-reveal class="t-eyebrow t-eyebrow--medium c-green">{{ t.team.eyebrow }}</p>
+        <h2 v-reveal="80" class="team__title t-h-section c-green">{{ t.team.title }}</h2>
+        <span v-reveal.line="250" class="headline-rule" />
+        <p v-reveal="200" class="team__lead t-lead c-charcoal">{{ t.team.lead }}</p>
       </div>
 
       <div class="team__leads">
-        <article v-for="person in t.team.leads" :key="person.key" class="lead-card">
+        <article v-for="(person, i) in t.team.leads" :key="person.key" v-reveal="i * 140" class="lead-card">
           <img :src="photos[person.key]" :alt="person.name" width="120" height="120" class="lead-card__photo" />
           <div class="lead-card__text">
             <span class="headline-rule headline-rule--sm" />
@@ -35,7 +35,7 @@ const photos = { wally, ibrahim, atef, moataz, maha, omar, ibrahimAhmed, lojaine
       </div>
 
       <ul class="team__members">
-        <li v-for="person in t.team.members" :key="person.key" class="member">
+        <li v-for="(person, i) in t.team.members" :key="person.key" v-reveal="i * 80" class="member">
           <img :src="photos[person.key]" :alt="person.name" width="104" height="104" class="member__photo" />
           <p class="member__name">{{ person.name }}</p>
           <p class="member__role">{{ person.role }}</p>
@@ -80,10 +80,18 @@ const photos = { wally, ibrahim, atef, moataz, maha, omar, ibrahimAhmed, lojaine
   border-radius: 20px;
   background: var(--blh-off-white);
 }
+.lead-card.is-visible:hover {
+  translate: 0 -4px;
+  box-shadow: var(--blh-shadow-card);
+}
 .lead-card__photo {
   flex-shrink: 0;
   width: 120px;
   height: 120px;
+  transition: transform 0.5s var(--ease-out);
+}
+.lead-card:hover .lead-card__photo {
+  transform: scale(1.05);
 }
 .lead-card__text {
   flex: 1 0 0;
@@ -111,6 +119,13 @@ const photos = { wally, ibrahim, atef, moataz, maha, omar, ibrahimAhmed, lojaine
   height: 104px;
   border-radius: 52px;
   object-fit: cover;
+  transition:
+    transform 0.5s var(--ease-out),
+    box-shadow 0.5s var(--ease-out);
+}
+.member:hover .member__photo {
+  transform: translateY(-4px) scale(1.04);
+  box-shadow: 0 0 0 4px var(--blh-off-white), 0 0 0 5px var(--blh-sage);
 }
 .member__name {
   width: 100%;

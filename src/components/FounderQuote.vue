@@ -8,15 +8,15 @@ const { t } = useI18n()
 <template>
   <section class="founder bg-green-deep">
     <div class="container founder__inner">
-      <div class="founder__portrait">
+      <div v-reveal.image class="founder__portrait">
         <img :src="portrait" :alt="t.alt.founder" />
       </div>
 
       <figure class="founder__quote">
-        <p class="founder__mark" aria-hidden="true">{{ t.founder.mark }}</p>
-        <blockquote class="founder__text">{{ t.founder.quote }}</blockquote>
-        <figcaption class="founder__who">
-          <span class="headline-rule headline-rule--sm" />
+        <p v-reveal.scale="200" class="founder__mark" aria-hidden="true">{{ t.founder.mark }}</p>
+        <blockquote v-reveal="320" class="founder__text">{{ t.founder.quote }}</blockquote>
+        <figcaption v-reveal="480" class="founder__who">
+          <span v-reveal.line="650" class="headline-rule headline-rule--sm" />
           <span class="founder__spacer" />
           <span class="t-h3 c-white">{{ t.founder.name }}</span>
           <span class="t-body c-mist">{{ t.founder.role }}</span>

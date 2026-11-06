@@ -9,16 +9,23 @@ const { t } = useI18n()
 <template>
   <section id="about" class="arabic-first bg-white">
     <div class="container arabic-first__inner">
-      <img class="arabic-first__photo" :src="photo" :alt="t.alt.compliance" width="520" height="640" />
+      <img
+        v-reveal.image
+        class="arabic-first__photo"
+        :src="photo"
+        :alt="t.alt.compliance"
+        width="520"
+        height="640"
+      />
 
       <div class="arabic-first__text">
-        <p class="t-eyebrow c-green">{{ t.arabicFirst.eyebrow }}</p>
-        <h2 class="t-h-section c-green">{{ t.arabicFirst.title }}</h2>
-        <span class="headline-rule" />
-        <p class="t-lead c-charcoal">{{ t.arabicFirst.lead }}</p>
+        <p v-reveal class="t-eyebrow c-green">{{ t.arabicFirst.eyebrow }}</p>
+        <h2 v-reveal="80" class="t-h-section c-green">{{ t.arabicFirst.title }}</h2>
+        <span v-reveal.line="250" class="headline-rule" />
+        <p v-reveal="200" class="t-lead c-charcoal">{{ t.arabicFirst.lead }}</p>
 
         <ul class="agenda">
-          <li v-for="item in t.arabicFirst.agenda" :key="item.title">
+          <li v-for="(item, i) in t.arabicFirst.agenda" :key="item.title" v-reveal="280 + i * 90">
             <a href="#practices" class="agenda__item">
               <span class="agenda__text">
                 <span class="t-body-strong c-green">{{ item.title }}</span>
@@ -60,11 +67,30 @@ const { t } = useI18n()
 }
 
 .agenda__item {
+  position: relative;
   display: flex;
   align-items: flex-start;
   gap: 20px;
   padding-block: 18px;
   border-top: 1px solid var(--blh-mist);
+}
+/* Copper underline sweeps across the divider on hover */
+.agenda__item::before {
+  content: '';
+  position: absolute;
+  top: -1px;
+  inset-inline: 0;
+  height: 1px;
+  background: var(--blh-copper);
+  transform: scaleX(0);
+  transform-origin: left center;
+  transition: transform 0.5s var(--ease-out);
+}
+[dir='rtl'] .agenda__item::before {
+  transform-origin: right center;
+}
+.agenda__item:hover::before {
+  transform: scaleX(1);
 }
 .agenda__text {
   flex: 1 0 0;

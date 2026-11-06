@@ -1,0 +1,82 @@
+/* ==========================================================================
+   Motion system — used by the v-reveal directive (src/motion/reveal.js)
+   ========================================================================== */
+:root {
+  --ease-out: cubic-bezier(0.22, 1, 0.36, 1); /* expo-like, settles softly */
+  --ease-in-out: cubic-bezier(0.65, 0, 0.35, 1);
+  --reveal-duration: 0.9s;
+}
+
+/*
+ * One transition list for every revealed element. Entrance properties honour
+ * --reveal-delay; interaction properties (hover colour, lift) never wait for it.
+ */
+.reveal {
+  transition:
+    opacity var(--reveal-duration) var(--ease-out) var(--reveal-delay, 0ms),
+    transform var(--reveal-duration) var(--ease-out) var(--reveal-delay, 0ms),
+    clip-path 1.2s var(--ease-in-out) var(--reveal-delay, 0ms),
+    background-color 0.25s ease,
+    color 0.25s ease,
+    box-shadow 0.3s ease,
+    translate 0.3s var(--ease-out);
+}
+
+.reveal--up:not(.is-visible) {
+  opacity: 0;
+  transform: translate3d(0, 28px, 0);
+}
+
+.reveal--fade:not(.is-visible) {
+  opacity: 0;
+}
+
+.reveal--scale:not(.is-visible) {
+  opacity: 0;
+  transform: scale(0.94);
+}
+
+/* Curtain: the photo rises into its frame while the zoom settles */
+.reveal--image {
+  clip-path: inset(0 0 0 0);
+}
+.reveal--image:not(.is-visible) {
+  clip-path: inset(100% 0 0 0);
+  transform: scale(1.08);
+}
+.reveal--image.is-visible {
+  transition-duration: 1.2s, 1.6s, 1.2s, 0.25s, 0.25s, 0.3s, 0.3s;
+}
+
+/* Headline rules draw in from the reading-start edge */
+.reveal--line {
+  transform-origin: left center;
+}
+[dir='rtl'] .reveal--line {
+  transform-origin: right center;
+}
+.reveal--line:not(.is-visible) {
+  transform: scaleX(0);
+}
+
+/* ==========================================================================
+   Reduced motion: show everything, animate nothing
+   ========================================================================== */
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    transition-delay: 0ms !important;
+  }
+  .reveal {
+    opacity: 1 !important;
+    transform: none !important;
+    clip-path: none !important;
+  }
+}

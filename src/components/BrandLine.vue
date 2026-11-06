@@ -9,8 +9,8 @@ const { t } = useI18n()
   <section class="brand bg-green-deep">
     <div class="container brand__inner">
       <template v-for="(word, i) in t.brandLine" :key="word">
-        <img v-if="i > 0" :src="dot" alt="" aria-hidden="true" class="brand__dot" />
-        <p class="brand__word">{{ word }}</p>
+        <img v-if="i > 0" v-reveal.scale="i * 220 - 110" :src="dot" alt="" aria-hidden="true" class="brand__dot" />
+        <p v-reveal="i * 220" class="brand__word">{{ word }}</p>
       </template>
     </div>
   </section>

@@ -8,11 +8,11 @@ const { t } = useI18n()
 <template>
   <section id="flagship" class="flagship bg-off-white">
     <div class="container flagship__inner">
-      <p class="t-eyebrow t-eyebrow--medium c-green">{{ t.flagship.eyebrow }}</p>
-      <h2 class="t-h-section c-green">{{ t.flagship.title }}</h2>
+      <p v-reveal class="t-eyebrow t-eyebrow--medium c-green">{{ t.flagship.eyebrow }}</p>
+      <h2 v-reveal="80" class="t-h-section c-green">{{ t.flagship.title }}</h2>
 
       <ul class="flagship__list">
-        <li v-for="item in t.flagship.items" :key="item.tag">
+        <li v-for="(item, i) in t.flagship.items" :key="item.tag" v-reveal="150 + i * 110">
           <a href="#contact" class="flag">
             <span class="flag__tag">{{ item.tag }}</span>
             <h3 class="flag__title t-h2 c-green">{{ item.title }}</h3>
@@ -27,7 +27,7 @@ const { t } = useI18n()
         </li>
       </ul>
 
-      <p class="flagship__tiers t-body-strong c-green">{{ t.flagship.tiers }}</p>
+      <p v-reveal="300" class="flagship__tiers t-body-strong c-green">{{ t.flagship.tiers }}</p>
     </div>
   </section>
 </template>
@@ -45,11 +45,48 @@ const { t } = useI18n()
 }
 
 .flag {
+  position: relative;
   display: flex;
   align-items: center;
   gap: 32px;
   padding-block: 28px;
   border-bottom: 1px solid var(--blh-sage);
+}
+/* Copper rule sweeps along the row divider on hover */
+.flag::after {
+  content: '';
+  position: absolute;
+  bottom: -1px;
+  inset-inline: 0;
+  height: 2px;
+  background: var(--blh-copper);
+  transform: scaleX(0);
+  transform-origin: left center;
+  transition: transform 0.6s var(--ease-out);
+}
+[dir='rtl'] .flag::after {
+  transform-origin: right center;
+}
+.flag:hover::after {
+  transform: scaleX(1);
+}
+.flag__title {
+  transition: translate 0.4s var(--ease-out);
+}
+.flag:hover .flag__title {
+  translate: 8px 0;
+}
+[dir='rtl'] .flag:hover .flag__title {
+  translate: -8px 0;
+}
+.flag__arrow :deep(.arrow__glyph) {
+  transition: translate 0.4s var(--ease-out);
+}
+.flag:hover .flag__arrow :deep(.arrow__glyph) {
+  translate: 3px 0;
+}
+[dir='rtl'] .flag:hover .flag__arrow :deep(.arrow__glyph) {
+  translate: -3px 0;
 }
 .flag__tag {
   flex-shrink: 0;
@@ -87,10 +124,13 @@ const { t } = useI18n()
   height: 48px;
   border-radius: 24px;
   background: var(--blh-green);
-  transition: background-color 0.2s ease;
+  transition:
+    background-color 0.3s ease,
+    transform 0.4s var(--ease-out);
 }
 .flag:hover .flag__arrow {
   background: var(--blh-copper);
+  transform: scale(1.08);
 }
 [dir='rtl'] .flagship__tiers {
   font-weight: 400;

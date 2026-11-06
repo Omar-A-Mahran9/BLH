@@ -9,25 +9,41 @@ const { t } = useI18n()
 <template>
   <section id="contact" class="cta bg-off-white">
     <div class="container cta__inner">
-      <div class="cta__card">
+      <div v-reveal.scale class="cta__card">
         <div class="cta__text">
-          <p class="t-eyebrow c-mist">{{ t.cta.eyebrow }}</p>
-          <h2 class="t-h-section c-white">{{ t.cta.title }}</h2>
+          <p v-reveal="200" class="t-eyebrow c-mist">{{ t.cta.eyebrow }}</p>
+          <h2 v-reveal="280" class="t-h-section c-white">{{ t.cta.title }}</h2>
 
           <ol class="cta__steps">
-            <li v-for="(step, i) in t.cta.steps" :key="step.label" class="cta__step">
+            <li
+              v-for="(step, i) in t.cta.steps"
+              :key="step.label"
+              v-reveal="400 + i * 120"
+              class="cta__step"
+            >
               <span class="cta__n">{{ i + 1 }}</span>
               <span class="cta__label t-body-strong c-white">{{ step.label }}</span>
               <span class="cta__when t-caption c-mist">{{ step.when }}</span>
             </li>
           </ol>
 
-          <BaseButton href="tel:+201132842250" variant="outline" arrow arrow-color="green">
-            {{ t.cta.button }}
-          </BaseButton>
-          <p class="cta__contact t-caption c-mist">{{ t.cta.contact }}</p>
+          <div v-reveal="780">
+            <BaseButton href="tel:+201132842250" variant="outline" arrow arrow-color="green">
+              {{ t.cta.button }}
+            </BaseButton>
+          </div>
+          <p v-reveal="860" class="cta__contact t-caption c-mist">{{ t.cta.contact }}</p>
         </div>
-        <img class="cta__photo" :src="photo" :alt="t.alt.cairoTeam" width="520" height="544" />
+        <div class="cta__media">
+          <img
+            v-reveal.image="250"
+            class="cta__photo"
+            :src="photo"
+            :alt="t.alt.cairoTeam"
+            width="520"
+            height="544"
+          />
+        </div>
       </div>
     </div>
   </section>
@@ -97,14 +113,19 @@ const { t } = useI18n()
 .cta__contact {
   white-space: pre;
 }
-.cta__photo {
+.cta__media {
   flex-shrink: 0;
   width: 520px;
+  overflow: hidden;
+}
+.cta__photo {
+  width: 100%;
+  height: 100%;
   object-fit: cover;
 }
 
 @media (max-width: 1280px) {
-  .cta__photo {
+  .cta__media {
     width: 400px;
   }
   .cta__text {
@@ -116,7 +137,7 @@ const { t } = useI18n()
   .cta__card {
     flex-direction: column-reverse;
   }
-  .cta__photo {
+  .cta__media {
     width: 100%;
     height: 320px;
   }

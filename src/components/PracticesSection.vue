@@ -14,18 +14,21 @@ const active = ref(0)
     <div class="container practices__inner">
       <div class="practices__header">
         <div class="practices__heading">
-          <p class="t-eyebrow t-eyebrow--medium c-green">{{ t.practices.eyebrow }}</p>
-          <h2 class="t-h-section c-green">{{ t.practices.title }}</h2>
+          <p v-reveal class="t-eyebrow t-eyebrow--medium c-green">{{ t.practices.eyebrow }}</p>
+          <h2 v-reveal="80" class="t-h-section c-green">{{ t.practices.title }}</h2>
         </div>
-        <BaseButton href="#flagship" variant="outline" arrow arrow-color="green">
-          {{ t.practices.all }}
-        </BaseButton>
+        <div v-reveal="200">
+          <BaseButton href="#flagship" variant="outline" arrow arrow-color="green">
+            {{ t.practices.all }}
+          </BaseButton>
+        </div>
       </div>
 
       <div class="practices__grid" @mouseleave="active = 0">
         <a
           v-for="(item, i) in t.practices.items"
           :key="item.n"
+          v-reveal="i * 110"
           href="#flagship"
           class="practice"
           :class="active === i ? 'practice--dark' : 'practice--light'"
@@ -79,9 +82,14 @@ const active = ref(0)
   gap: 40px;
   padding: 24px;
   border-radius: 16px;
-  transition:
-    background-color 0.25s ease,
-    color 0.25s ease;
+  /* transitions come from .reveal (motion.css) so entrance + hover share one list */
+}
+.practice.is-visible:hover {
+  translate: 0 -6px;
+  box-shadow: 0 18px 40px -12px rgba(18, 48, 42, 0.35);
+}
+.practice--light.is-visible:hover {
+  box-shadow: var(--blh-shadow-card);
 }
 .practice--dark {
   background: var(--blh-green-deep);
