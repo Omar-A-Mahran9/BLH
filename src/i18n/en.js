@@ -47,12 +47,6 @@ export default {
       { value: '90', unit: 'days', text: 'on-the-job impact report after delivery' },
     ],
   },
-  founder: {
-    mark: '“',
-    quote: 'True advisory is not just about identifying the right path, but ensuring the institution has the strength to walk it.',
-    name: 'Fouad Darwish',
-    role: 'Founder & Managing Partner — leads the Anti-Corruption & Financial Integrity practice',
-  },
   team: {
     eyebrow: 'The team',
     title: 'The people who run every programme',
@@ -114,7 +108,6 @@ export default {
     compliance: 'Two compliance professionals reviewing a case file',
     leadersAi: 'Leaders in an AI session',
     kpiWorkshop: 'Team mapping KPIs on a wall',
-    founder: 'Fouad Darwish',
     cairoTeam: 'Discovery conversation in Cairo',
   },
 }

@@ -2,7 +2,7 @@
 import { useI18n } from '@/i18n'
 import wally from '@/assets/images/mohamed-wally.png'
 import ibrahim from '@/assets/images/mohamed-ibrahim.png'
-import atef from '@/assets/images/ahmed-atef.png'
+import atef from '@/assets/images/ahmed-atef.jpg'
 import moataz from '@/assets/images/moataz-mansy.png'
 import maha from '@/assets/images/maha-omran.png'
 import omar from '@/assets/images/omar-mahran.png'
