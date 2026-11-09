@@ -1,13 +1,13 @@
 <script setup>
 import { useI18n } from '@/i18n'
-import wally from '@/assets/images/mohamed-wally.png'
-import ibrahim from '@/assets/images/mohamed-ibrahim.png'
-import atef from '@/assets/images/ahmed-atef.jpg'
-import moataz from '@/assets/images/moataz-mansy.jpg'
-import maha from '@/assets/images/maha-omran.png'
-import omar from '@/assets/images/omar-mahran.png'
-import ibrahimAhmed from '@/assets/images/ibrahim-ahmed.png'
-import lojaine from '@/assets/images/lojaine-ahmed.png'
+import wally from '@/assets/images/mohamed-wally.webp'
+import ibrahim from '@/assets/images/mohamed-ibrahim.webp'
+import atef from '@/assets/images/ahmed-atef.webp'
+import moataz from '@/assets/images/moataz-mansy.webp'
+import maha from '@/assets/images/maha-omran.webp'
+import omar from '@/assets/images/omar-mahran.webp'
+import ibrahimAhmed from '@/assets/images/ibrahim-ahmed.webp'
+import lojaine from '@/assets/images/lojaine-ahmed.webp'
 
 const { t } = useI18n()
 const photos = { wally, ibrahim, atef, moataz, maha, omar, ibrahimAhmed, lojaine }
@@ -25,7 +25,7 @@ const photos = { wally, ibrahim, atef, moataz, maha, omar, ibrahimAhmed, lojaine
 
       <div class="team__leads">
         <article v-for="(person, i) in t.team.leads" :key="person.key" v-reveal="i * 140" class="lead-card">
-          <img :src="photos[person.key]" :alt="person.name" width="120" height="120" class="lead-card__photo" />
+          <img :src="photos[person.key]" :alt="person.name" width="120" height="120" class="lead-card__photo" loading="lazy" decoding="async" />
           <div class="lead-card__text">
             <span class="headline-rule headline-rule--sm" />
             <h3 class="t-h2 c-green">{{ person.name }}</h3>
@@ -36,7 +36,7 @@ const photos = { wally, ibrahim, atef, moataz, maha, omar, ibrahimAhmed, lojaine
 
       <ul class="team__members">
         <li v-for="(person, i) in t.team.members" :key="person.key" v-reveal="i * 80" class="member">
-          <img :src="photos[person.key]" :alt="person.name" width="104" height="104" class="member__photo" />
+          <img :src="photos[person.key]" :alt="person.name" width="104" height="104" class="member__photo" loading="lazy" decoding="async" />
           <p class="member__name">{{ person.name }}</p>
           <p class="member__role">{{ person.role }}</p>
         </li>

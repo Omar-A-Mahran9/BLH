@@ -1,7 +1,7 @@
 <script setup>
 import { useI18n } from '@/i18n'
 import BaseButton from './BaseButton.vue'
-import photo from '@/assets/images/cairo-team.png'
+import photo from '@/assets/images/cairo-team.webp'
 
 const { t } = useI18n()
 </script>
@@ -40,6 +40,8 @@ const { t } = useI18n()
             class="cta__photo"
             :src="photo"
             :alt="t.alt.cairoTeam"
+            loading="lazy"
+            decoding="async"
             width="520"
             height="544"
           />

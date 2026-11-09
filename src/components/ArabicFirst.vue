@@ -1,7 +1,7 @@
 <script setup>
 import { useI18n } from '@/i18n'
 import ArrowIcon from './ArrowIcon.vue'
-import photo from '@/assets/images/compliance-pair.png'
+import photo from '@/assets/images/compliance-pair.webp'
 
 const { t } = useI18n()
 </script>
@@ -14,6 +14,8 @@ const { t } = useI18n()
         class="arabic-first__photo"
         :src="photo"
         :alt="t.alt.compliance"
+        loading="lazy"
+        decoding="async"
         width="520"
         height="640"
       />

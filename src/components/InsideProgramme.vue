@@ -1,8 +1,8 @@
 <script setup>
 import { useI18n } from '@/i18n'
 import CountUp from './CountUp.vue'
-import leadersAi from '@/assets/images/leaders-ai-session.png'
-import kpiWorkshop from '@/assets/images/kpi-workshop.png'
+import leadersAi from '@/assets/images/leaders-ai-session.webp'
+import kpiWorkshop from '@/assets/images/kpi-workshop.webp'
 
 const { t } = useI18n()
 </script>
@@ -24,6 +24,8 @@ const { t } = useI18n()
           class="inside__photo inside__photo--wide"
           :src="leadersAi"
           :alt="t.alt.leadersAi"
+          loading="lazy"
+          decoding="async"
           width="700"
           height="460"
         />
@@ -32,6 +34,8 @@ const { t } = useI18n()
           class="inside__photo inside__photo--narrow"
           :src="kpiWorkshop"
           :alt="t.alt.kpiWorkshop"
+          loading="lazy"
+          decoding="async"
           width="480"
           height="460"
         />

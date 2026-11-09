@@ -2,7 +2,7 @@
 import { useI18n } from '@/i18n'
 import BaseButton from './BaseButton.vue'
 import CountUp from './CountUp.vue'
-import heroPhoto from '@/assets/images/hero-workshop.png'
+import heroPhoto from '@/assets/images/hero-workshop.webp'
 import dot from '@/assets/icons/dot-pill.svg'
 
 const { t } = useI18n()
@@ -47,6 +47,7 @@ const { t } = useI18n()
           class="hero__photo"
           :src="heroPhoto"
           :alt="t.alt.hero"
+          fetchpriority="high"
           width="620"
           height="600"
         />
