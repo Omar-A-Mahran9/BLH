@@ -164,6 +164,13 @@ const { t } = useI18n()
   font-size: 14px;
   line-height: 24px;
 }
+@media (max-width: 480px) {
+  .hero__pill {
+    max-width: 100%;
+    white-space: normal;
+    border-radius: 20px;
+  }
+}
 
 .hero__title {
   color: var(--blh-green-deep);
