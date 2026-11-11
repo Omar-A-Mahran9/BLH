@@ -9,6 +9,7 @@ import TeamSection from './components/TeamSection.vue'
 import FlagshipSection from './components/FlagshipSection.vue'
 import HowWeWork from './components/HowWeWork.vue'
 import CtaSection from './components/CtaSection.vue'
+import ContactForm from './components/ContactForm.vue'
 import SiteFooter from './components/SiteFooter.vue'
 </script>
 
@@ -24,6 +25,7 @@ import SiteFooter from './components/SiteFooter.vue'
     <FlagshipSection />
     <HowWeWork />
     <CtaSection />
+    <ContactForm />
   </main>
   <SiteFooter />
 </template>
