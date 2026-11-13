@@ -53,11 +53,9 @@ export default {
     lead: 'Chief consultants who lead the practices, and the team that runs every programme from first call to impact report.',
     leads: [
       { key: 'wally', name: 'Dr. Mohamed Wally', role: 'Chief Consultant, Training' },
-      { key: 'ibrahim', name: 'Dr. Mohamed Ibrahim', role: 'Chief Consultant, Digital Transformation' },
     ],
     members: [
       { key: 'atef', name: 'Ahmed Atef', role: 'Training Manager' },
-      { key: 'moataz', name: 'Moataz Mansy', role: 'Sales Manager' },
       { key: 'maha', name: 'Maha Omran', role: 'UI/UX Designer' },
       { key: 'omar', name: 'Omar Mahran', role: 'Lead Developer' },
       { key: 'ibrahimAhmed', name: 'Ibrahim Ahmed', role: 'Developer' },

@@ -1,16 +1,14 @@
 <script setup>
 import { useI18n } from '@/i18n'
 import wally from '@/assets/images/mohamed-wally.webp'
-import ibrahim from '@/assets/images/mohamed-ibrahim.webp'
 import atef from '@/assets/images/ahmed-atef.webp'
-import moataz from '@/assets/images/moataz-mansy.webp'
 import maha from '@/assets/images/maha-omran.webp'
 import omar from '@/assets/images/omar-mahran.webp'
 import ibrahimAhmed from '@/assets/images/ibrahim-ahmed.webp'
 import lojaine from '@/assets/images/lojaine-ahmed.webp'
 
 const { t } = useI18n()
-const photos = { wally, ibrahim, atef, moataz, maha, omar, ibrahimAhmed, lojaine }
+const photos = { wally, atef, maha, omar, ibrahimAhmed, lojaine }
 </script>
 
 <template>
@@ -104,7 +102,7 @@ const photos = { wally, ibrahim, atef, moataz, maha, omar, ibrahimAhmed, lojaine
 
 .team__members {
   display: grid;
-  grid-template-columns: repeat(6, minmax(0, 1fr));
+  grid-template-columns: repeat(5, minmax(0, 1fr));
   gap: 16px;
 }
 .member {
