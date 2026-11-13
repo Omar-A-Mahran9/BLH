@@ -86,6 +86,8 @@ const photos = { wally, atef, maha, omar, ibrahimAhmed, lojaine }
   flex-shrink: 0;
   width: 120px;
   height: 120px;
+  border-radius: 50%;
+  object-fit: cover;
   transition: transform 0.5s var(--ease-out);
 }
 .lead-card:hover .lead-card__photo {
